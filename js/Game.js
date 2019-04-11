@@ -19,7 +19,9 @@ class Game {
 
 		const gameBirdUp = this.birdUp.bind(this);
 		document.addEventListener("keydown", gameBirdUp);
+		document.addEventListener("touchend", gameBirdUp);
 	};
+
 
   	set bX (val) {
 	    this.bird.x = val;
@@ -72,7 +74,7 @@ class Game {
 			}
 
 			if(this.isBirdFailed(pipe)){
-				window.location.reload();
+				this.endGame();
 			}
 
 			this.isBirdGoesThroughtPipe(pipe);
@@ -101,5 +103,12 @@ class Game {
 	    this.ctx.fillStyle = "#000";
 	    this.ctx.font = "20px Verdana";
 	    this.ctx.fillText(`Score : ${this.score}`, 10, this.gameContainerHeight - 20);
+	}
+
+	endGame() {
+		this.pipes = [];
+		this.pipes.push(new PipeWall(288,0));
+		this.bird = new Bird(10, 150);
+		this.score = 0;
 	}
 }
