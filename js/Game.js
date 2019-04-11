@@ -46,7 +46,9 @@ class Game {
 		});
 	}
 
-	birdUp(){
+	birdUp(e){
+	  e.stopPropagation();
+	  e.preventDefault();
 	  this.bird.flyUp();
 	}
 
@@ -106,6 +108,11 @@ class Game {
 	}
 
 	endGame() {
+		if(this.score) {
+			alert(`Well done!\nYour score is ${this.score}.`);
+		} else {
+			alert('You did well,\nGood luck next time!');
+		}
 		this.pipes = [];
 		this.pipes.push(new PipeWall(288,0));
 		this.bird = new Bird(10, 150);
